@@ -6,22 +6,22 @@ int main()
     scanf("%d",&a);
     printf("Enter the second numbers :");
     scanf("%d",&b);
-    int choice;
-    printf("1. Addition\n2. Subtarct\n3.Multiplication\n4.Division\nEnter the choice : ");    
+    char choice;
+       
     scanf(" %d", &choice);
-    if (choice==1)
+    if (choice=='+')
     {
         printf("The sum is : %d",a+b);
     }
-    else if (choice==2)
+    else if (choice=='-')
     {
         printf("The difference is : %d",a-b);
     }
-    else if (choice==3)
+    else if (choice=='*')
     {
         printf("The product is : %d",a*b);
     }
-    else if (choice==4)
+    else if (choice=='/')
     {
         if (b!=0)
         {
@@ -29,13 +29,13 @@ int main()
         }
         else
         {
-            printf("Error: Division by zero is not allowed.");
+            printf("INF");
         }
         
     }
     else
     {
-        printf("Invalid choice.");
+        printf("NA");
     }
     return 0;
 }
