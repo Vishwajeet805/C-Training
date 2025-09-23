@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include <stdio.h>
 int main()
 {
     int a,b;
@@ -25,7 +25,7 @@ int main()
     {
         if (b!=0)
         {
-            printf("The quotient is : %.2f",a/b);
+            printf("The quotient is : %.2f", (float)a / b);
         }
         else
         {
