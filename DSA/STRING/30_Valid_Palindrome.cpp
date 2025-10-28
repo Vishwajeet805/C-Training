@@ -29,8 +29,7 @@ int main() {
         j--;
     }
 
-    if (possible) cout << "true";
-    else cout << "false";
+(possible) ? cout << "true":cout << "false";
 
     return 0;
 }
