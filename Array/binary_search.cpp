@@ -11,7 +11,7 @@
         int mid=(s+end)/2;
         if(arr[mid]==target){
             return mid;
-            // printf("%d",mid);
+            
         }
         else if(arr[mid]<target){
             s=mid+1;
