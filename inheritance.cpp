@@ -94,19 +94,19 @@ using namespace std;
 // }
 class Animal{
     public:
-     Eat(){
+     void Eat(){
         cout<<"can eat\n";
     }
     
 };
-class Bird:public Animal
+class Bird:public virtual Animal
 {
     public:
-    Fly(){
+    void Fly(){
         cout<<"Can Fly\n";
     }
 };
-class Mammal:public Animal
+class Mammal:public virtual Animal
 {
     public:
     void birth(){
@@ -117,13 +117,14 @@ class Bat:public Bird,public Mammal
 {
     public:
     void boy(){
-        cout<<"the vehicle is a bus with fare \n";
+        cout<<"I am a bat\n";
     }
 };
 int main(){
-    Beta daddaTyagi;
-    daddaTyagi.height();
-    daddaTyagi.hair();
+    Bat daddaTyagi;
+    daddaTyagi.Eat();
+    daddaTyagi.Fly();
+    daddaTyagi.birth();
     daddaTyagi.boy();
     return 0;
 }
