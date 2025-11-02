@@ -135,7 +135,26 @@
     p->next = temp;
     temp->next = null;
     }
-    void disp()
+    void swapNodes(int m, int n)
+    {
+        //
+    }
+
+    void reverseList()
+    {
+    p = null;
+    temp = first;
+    while (temp != null)
+    {
+        ttemp = temp->next;
+        temp->next = p;
+        p = temp;
+        temp = ttemp;
+
+    }
+    first = p;
+    }
+    void display()
     {
     temp = first;
     while (temp != null)
@@ -153,23 +172,25 @@
     addnode(30);
     addnode(50);
     addnode(60);
-    disp();
+    display();
     addBeforeFirst(70);
-    disp();
+    display();
     addAfter(30, 90);
-    disp();
+    display();
     addBefore(30, 50);
-    disp();
+    display();
     addBeforeLast(570);
-    disp();
+    display();
     deleteFirst();
-    disp();
+    display();
     delBefore(570);
-    disp();
+    display();
     deleteAfter(570);
-    disp();
+    display();
     swapFirstSecond();
-    disp();
+    display();
     swapLastLastSecond();
-    disp();
+    display();
+    reverseList();
+    display();
     }

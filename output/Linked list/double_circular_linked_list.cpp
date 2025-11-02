@@ -3,212 +3,175 @@
 #define null 0
 using namespace std;
 
-struct node
-{
+struct node {
     int data;
-    node *next;
+    node *next, *prev;
 };
 
-node *first, *temp, *ttemp,*p,*q,*r;
+node *first, *temp, *ttemp, *p, *q, *r;
 
-void init()
-{
+void init() {
     first = temp = ttemp = null;
 }
 
-void createfirst(int val)
-{
+void createfirst(int val) {
     first = new node;
-   
-    first->data= val;
+    first->data = val;
     first->next = first;
+    first->prev = first;
 }
 
-void addnode(int val)
-{
+void addnode(int val) {
     temp = first;
     while (temp->next != first)
-    {
         temp = temp->next;
-    }
-
-    ttemp = new node;
-   ttemp->data= val;
-    ttemp->next = first;
-    temp->next = ttemp;
-}
-void display()
-{
-    temp = first;
-    cout << "List:\n";
-    do
-    {
-        cout << temp->data << endl;
-        temp = temp->next;
-    } while (temp != first);
-    cout << endl;
-}
-void addAfter(int x, int y)
-{
-    temp = first;
-    while (temp->data != x)
-    {
-        temp = temp->next;
-    }
-    ttemp = temp->next;
-    p = new node;
-    p->data = y;
-    temp->next = p;
-    p->next = ttemp;    
-
-}
-void addBeforeFirst(int val)
-{
-    temp = first;
-    while (temp->next != first)
-    {
-        temp = temp->next;
-    }
     ttemp = new node;
     ttemp->data = val;
     ttemp->next = first;
-    first = ttemp;
-    temp->next = first;
+    ttemp->prev = temp;
+    temp->next = ttemp;
+    first->prev = ttemp;
 }
-void addBefore(int x, int y)
-{
+
+void display() {
+    temp = first;
+    cout << "List:\n";
+    p = first;
+    if (first == null) return;
+    while (p->next != first) {
+        cout << p->data << endl;
+        p = p->next;
+    }
+    cout << p->data << endl; // last node
+    cout << endl;
+}
+
+void addAfter(int x, int y) {
+    temp = first;
+    while (temp->data != x)
+        temp = temp->next;
+    ttemp = new node;
+    ttemp->data = y;
+    ttemp->next = temp->next;
+    ttemp->prev = temp;
+    temp->next->prev = ttemp;
+    temp->next = ttemp;
+}
+
+void addBeforeFirst(int val) {
+    temp = first;
+    while (temp->next != first)
+        temp = temp->next;
+    ttemp = new node;
+    ttemp->data = val;
+    ttemp->next = first;
+    ttemp->prev = temp;
+    temp->next = ttemp;
+    first->prev = ttemp;
+    first = ttemp;
+}
+
+void addBefore(int x, int y) {
     temp = first;
     while (temp->next->data != x)
-    {
         temp = temp->next;
-    }
     p = new node;
     p->data = y;
     p->next = temp->next;
+    p->prev = temp;
+    temp->next->prev = p;
     temp->next = p;
+    if (temp->next == first)
+        first = p;
 }
-void addBeforeLast(int x)
-{
+
+void addBeforeLast(int x) {
     temp = first;
     while (temp->next->next != first)
-    {
         temp = temp->next;
-    }
     p = new node;
     p->data = x;
     p->next = temp->next;
+    p->prev = temp;
+    temp->next->prev = p;
     temp->next = p;
 }
-void deleteFirst()
-{
+
+void deleteFirst() {
     temp = first;
     while (temp->next != first)
-    {
         temp = temp->next;
-    }
     p = first;
     first = first->next;
+    first->prev = temp;
     temp->next = first;
     delete p;
 }
-void deleteAfter(int x)
-{
+
+void deleteAfter(int x) {
     temp = first;
     while (temp->data != x)
-    {
         temp = temp->next;
-    }
-    ttemp = temp->next;
-    p = ttemp->next;
-    temp->next = p;
-    delete ttemp;
-}
-void deleteBefore(int x)
-{
-    temp = first;
-    while (temp->next->next->data != x)
-    {
-        temp = temp->next;
-    }
     ttemp = temp->next;
     temp->next = ttemp->next;
+    ttemp->next->prev = temp;
     delete ttemp;
 }
-void swapFirstSecond()
-{
+
+void deleteBefore(int x) {
+    temp = first;
+    while (temp->next->next->data != x)
+        temp = temp->next;
+    ttemp = temp->next;
+    temp->next = ttemp->next;
+    ttemp->next->prev = temp;
+    delete ttemp;
+}
+
+void swapFirstSecond() {
     temp = first->next;
     ttemp = temp->next;
     temp->next = first;
+    first->prev = temp;
     first->next = ttemp;
+    ttemp->prev = first;
+    temp->prev = first->prev;
+    first->prev->next = temp;
     first = temp;
 }
-void swapLastLastSecond()
-{
+
+void swapLastLastSecond() {
     temp = first;
-    while (temp->next->next != first)
-    {
+    while (temp->next->next != first) {
         ttemp = temp;
         temp = temp->next;
     }
     p = temp->next;
-
     ttemp->next = p;
+    p->prev = ttemp;
     p->next = temp;
+    temp->prev = p;
     temp->next = first;
-}
-void reverseList()
-{
-    p = first;
-    q = null;
-    r = null;
-    do
-    {
-        r = q;
-        q = p;
-        p = p->next;
-        q->next = r;
-    } while (p != first);
-    first->next = q;
-    first = q;
-}
-void swapNodes(int m, int n)
-{
-    if (m == n)
-        return;
-    p = first;
-    q = null;
-    for (int i = 1; i < m; i++)
-    {
-        q = p;
-        p = p->next;
-    }
-    r = first;
-    node *nt = null;
-    for (int i = 1; i < n; i++)
-    {
-        nt = r;
-        r = r->next;
-    }
-    if (q != null)
-    {
-        q->next = r;
-    }
-    if (nt != null)
-    {
-        nt->next = p;
-    }
-    node *tempNext = p->next;
-    p->next = r->next;
-    r->next = tempNext;
-
-    if (first == p)
-        first = r;
-    else if (first == r)
-        first = p;
+    first->prev = temp;
 }
 
-int main()
-{
+void reverseList() {
+    temp = first;
+    p = first;
+    q = first;
+    while (p->next != first) {
+        q = p->prev;
+        p->prev = p->next;
+        p->next = q;
+        p = p->prev;
+    }
+    q = p->prev;
+    p->prev = p->next;
+    p->next = q;
+    first = p;
+}
+
+int main() {
     init();
     createfirst(10);
     addnode(20);
