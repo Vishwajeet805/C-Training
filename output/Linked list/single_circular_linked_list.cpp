@@ -2,7 +2,8 @@
 #include <cstdlib>
 #define null 0
 using namespace std;
-
+// Circular Linked List Creation
+    //Node Creation
 struct node
 {
     int data;
@@ -10,20 +11,23 @@ struct node
 };
 
 node *first, *temp, *ttemp,*p,*q,*r;
-
+//linked list initialisation
 void init()
 {
     first = temp = ttemp = null;
 }
+    //For creating first node
 
-void createfirst(int val)
-{
-    first = new node;
-   
-    first->data= val;
-    first->next = first;
-}
-
+    void createfirst(int val)
+    {
+        first = new node;
+        
+        first->data= val;
+        first->next = first;
+    }
+    
+    //For adding node 
+    
 void addnode(int val)
 {
     temp = first;
@@ -37,6 +41,7 @@ void addnode(int val)
     ttemp->next = first;
     temp->next = ttemp;
 }
+//For Displaying Each Node of Linked List
 void display()
 {
     temp = first;
@@ -48,6 +53,7 @@ void display()
     } while (temp != first);
     cout << endl;
 }
+// Adding a new node After a given data (addAfter(int x,int y))
 void addAfter(int x, int y)
 {
     temp = first;
@@ -60,8 +66,9 @@ void addAfter(int x, int y)
     p->data = y;
     temp->next = p;
     p->next = ttemp;    
-
+    
 }
+// Adding a new node Before the first node (addBeforeFirst(int x))
 void addBeforeFirst(int val)
 {
     temp = first;
@@ -75,6 +82,7 @@ void addBeforeFirst(int val)
     first = ttemp;
     temp->next = first;
 }
+// Adding a new node Before a given data (addBefore(int x,int y))
 void addBefore(int x, int y)
 {
     temp = first;
@@ -87,6 +95,7 @@ void addBefore(int x, int y)
     p->next = temp->next;
     temp->next = p;
 }
+// Adding a new node Before the last node (addBeforeLast(int x)
 void addBeforeLast(int x)
 {
     temp = first;
@@ -99,6 +108,7 @@ void addBeforeLast(int x)
     p->next = temp->next;
     temp->next = p;
 }
+// Deleting the first node (delFirst( )
 void deleteFirst()
 {
     temp = first;
@@ -111,6 +121,7 @@ void deleteFirst()
     temp->next = first;
     delete p;
 }
+// Deleting a node After a given data (delAfter(int x))
 void deleteAfter(int x)
 {
     temp = first;
@@ -123,6 +134,7 @@ void deleteAfter(int x)
     temp->next = p;
     delete ttemp;
 }
+// Deleting a node Before a given data (delBefore(int x))
 void deleteBefore(int x)
 {
     temp = first;
@@ -134,6 +146,7 @@ void deleteBefore(int x)
     temp->next = ttemp->next;
     delete ttemp;
 }
+// Swapping the First and Second Node (swapFirstSecond( )
 void swapFirstSecond()
 {
     temp = first->next;
@@ -142,6 +155,7 @@ void swapFirstSecond()
     first->next = ttemp;
     first = temp;
 }
+// Swapping the Last and Last Second Node (swapLastSecondLast( )
 void swapLastLastSecond()
 {
     temp = first;
@@ -151,11 +165,12 @@ void swapLastLastSecond()
         temp = temp->next;
     }
     p = temp->next;
-
+    
     ttemp->next = p;
     p->next = temp;
     temp->next = first;
 }
+//For Reversing the linked list
 void reverseList()
 {
     p = first;
@@ -171,6 +186,7 @@ void reverseList()
     first->next = q;
     first = q;
 }
+// Swapping the Mth And Nth Node (swapMthNth( )
 void swapNodes(int m, int n)
 {
     if (m == n)
