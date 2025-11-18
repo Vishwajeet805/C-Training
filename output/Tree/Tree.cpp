@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
-void main() {
+int main() {
     cout << "This is Tree.cpp file." << endl;
+    return 0;
 }
