@@ -3,15 +3,17 @@ using namespace std;
 
 #define MAX 50
 
-struct Stack {
+struct Stack
+{
     string data[MAX];
     int top;
 };
 
 Stack s;
-Stack* p;
+Stack *p;
 
-void Init() {
+void Init()
+{
     p = &s;
     p->top = -1;
 }
@@ -20,38 +22,45 @@ int Empty() { return (p->top == -1); }
 
 int Full() { return (p->top == MAX - 1); }
 
-void Push(string x) {
+void Push(string x)
+{
     if (!Full())
         p->data[++p->top] = x;
 }
 
-string Pop() {
+string Pop()
+{
     if (!Empty())
         return p->data[p->top--];
     return "";
 }
 
-int isOperator(char c) {
+int isOperator(char c)
+{
     return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^');
 }
 
-int main() {
+int main()
+{
     string prefix;
     cout << "Enter Prefix Expression: ";
     cin >> prefix;
 
     Init();
 
-    for (int i = prefix.length() - 1; i >= 0; i--) {
+    for (int i = prefix.length() - 1; i >= 0; i--)
+    {
 
         char ch = prefix[i];
 
-        if (isalnum(ch)) {
+        if (isalnum(ch))
+        {
             string temp = "";
             temp += ch;
             Push(temp);
         }
-        else if (isOperator(ch)) {
+        else if (isOperator(ch))
+        {
 
             string op1 = Pop();
             string op2 = Pop();

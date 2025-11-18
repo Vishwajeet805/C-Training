@@ -16,9 +16,15 @@ void Init() {
     p->top = -1;
 }
 
-int Empty() { return (p->top == -1); }
+int Empty() 
+{
+     return (p->top == -1);
+ }
 
-int Full() { return (p->top == MAX - 1); }
+int Full() 
+{ 
+    return (p->top == MAX - 1); 
+}
 
 void Push(string x) {
     if (!Full())
