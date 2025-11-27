@@ -34,28 +34,6 @@ void add_Node(int val){
     else{
         ttemp->right=p;
     }
-}//create inorder preorder postorder functions without using recursion using stack
-void inorder(BST *r){
-    if(r!=NULL){
-        inorder(r->left);
-        cout<<r->data<<" ";
-        inorder(r->right);
-    }
-
-}
-void preorder(BST *r){
-    if(r!=NULL){
-        cout<<r->data<<" ";
-        preorder(r->left);
-        preorder(r->right);
-    }   
-}
-void postorder(BST *r){
-    if(r!=NULL){
-        postorder(r->left);
-        postorder(r->right);
-        cout<<r->data<<" ";
-    }   
 }
 int main() {
    init();
@@ -66,12 +44,7 @@ int main() {
    add_Node(170);  //[data=250][left=NULL][right=NULL]
    add_Node(300);  //[data=30][left=NULL][right=NULL]
    add_Node(20);  //[data=20][left=NULL][right=NULL]
-   cout<<"Inorder Traversal: ";
-    inorder(root);
-    cout<<"\nPreorder Traversal: ";
-    preorder(root);
-    cout<<"\nPostorder Traversal: ";
-    postorder(root);
+ 
 
 
    return 0;
