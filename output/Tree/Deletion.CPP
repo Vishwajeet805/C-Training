@@ -73,6 +73,46 @@ void findlevel(BST *r, int level, int &maxlevel){
         findlevel(r->right,level+1,maxlevel);
     }
 }
+void delete_Node(int val) {
+    temp = root;
+    ttemp = NULL;
+    while (temp != NULL && temp->data != val) {
+        ttemp = temp;
+        if (val < temp->data) {
+            temp = temp->left;
+        } else {
+            temp = temp->right;
+        }
+    }
+    if (temp == NULL) return; // Node not found
+
+    // Node with one child or no child
+    if (temp->left == NULL || temp->right == NULL) {
+        BST *child = (temp->left != NULL) ? temp->left : temp->right;
+        if (ttemp == NULL) { // Deleting root node
+            root = child;
+        } else if (ttemp->left == temp) {
+            ttemp->left = child;
+        } else {
+            ttemp->right = child;
+        }
+        delete temp;
+    } else { // Node with two children
+        BST *successorParent = temp;
+        BST *successor = temp->right; // Find the inorder successor
+        while (successor->left != NULL) {
+            successorParent = successor;
+            successor = successor->left;
+        }
+        temp->data = successor->data; // Copy the inorder successor's value
+        if (successorParent->left == successor) {
+            successorParent->left = successor->right; // Remove the successor
+        } else {
+            successorParent->right = successor->right; // Remove the successor
+        }
+        delete successor;
+    }
+}
 
 int main() {
    init();
