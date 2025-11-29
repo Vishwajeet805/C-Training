@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 using namespace std;
 struct BST
 {
@@ -58,25 +57,18 @@ void postorder(BST *r){
         cout<<r->data<<" ";
     }   
 }
-void countNodes(BST *r){
-    static int count=0;
+void countNodes(BST *r, int &count){
     if(r!=NULL){
-        countNodes(r->left);
+        countNodes(r->left,count);
         count++;
-        countNodes(r->right);
-    }if(r==root){
-
-        cout<<"\nTotal Nodes in BST: "<<count;
-    }   
-}
-void findlevel(BST *r, int level, int &maxlevel){
-    if(r!=NULL){
-        if(level>maxlevel){
-            maxlevel=level;
-        }
-        findlevel(r->left,level+1,maxlevel);
-        findlevel(r->right,level+1,maxlevel);
+        countNodes(r->right,count);
     }
+}
+int height (BST *r){
+    int h;
+    if (r==NULL)return 0;
+    return 1+max(height(r->left),height(r->right));
+    
 }
 
 int main() {
@@ -104,12 +96,10 @@ int main() {
     preorder(root);
     cout<<"\nPostorder Traversal: ";
     postorder(root);
-    
-    countNodes(root);
-   
-    int maxlevel=0;
-    findlevel(root,1,maxlevel); 
-    
-    
+    int count=0;
+    countNodes(root,count);
+    cout<<"\nTotal Nodes in BST: "<<count;
+    cout<<"\nHeight of BST: "<<height(root);    
+
    return 0;
 }
