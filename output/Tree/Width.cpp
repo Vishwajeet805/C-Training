@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 using namespace std;
 struct BST
 {
@@ -58,37 +57,22 @@ void postorder(BST *r){
         cout<<r->data<<" ";
     }   
 }
-void countNodes(BST *r){
-    static int count=0;
+void countNodes(BST *r, int &count){
     if(r!=NULL){
-        countNodes(r->left);
+        countNodes(r->left,count);
         count++;
-        countNodes(r->right);
-    }if(r==root){
-
-        cout<<"\nTotal Nodes in BST: "<<count;
-    }   
+        countNodes(r->right,count);
+    }
 }
-int findLevelInBST(BST *r, int key, int level){
-    if(r == NULL)
-        return 0;
 
-    if(r->data == key)
-        return level;
-
-    if(key < r->data)
-        return findLevelInBST(r->left, key, level + 1);
-    else
-        return findLevelInBST(r->right, key, level + 1);
-}
 int main() {
    init();
-   create_Root(50);
-   add_Node(30);   
-   add_Node(70);  
-   add_Node(90);  
-   add_Node(20);  
-   add_Node(10);  
+   create_Root(50);// [data=100][left=NULL][right=NULL]
+   add_Node(30);   //[data=50][left=NULL][right=NULL]
+   add_Node(70);  //[data=200][left=NULL][right=NULL]
+   add_Node(90);  //[data=150][left=NULL][right=NULL]
+   add_Node(20);  //[data=250][left=NULL][right=NULL]
+   add_Node(10);  //[data=30][left=NULL][right=NULL]
    add_Node(100); 
    add_Node(60);  
    add_Node(80);  
@@ -106,15 +90,10 @@ int main() {
     preorder(root);
     cout<<"\nPostorder Traversal: ";
     postorder(root);
-    countNodes(root);
-    int key = 85;
-    int level = findLevelInBST(root, key, 1);
-    if(level)
-        cout<<"\nLevel of "<<key<<" in BST: "<<level;
-    else
-        cout<<"\n"<<key<<" is not present in the BST.";
-     
-    
-    
+    int count=0;
+    countNodes(root,count);
+    cout<<"\nTotal Nodes in BST: "<<count;
+       
+
    return 0;
 }
