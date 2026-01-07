@@ -1,3 +1,7 @@
+#include<stdio.h>
+#include<conio.h>
+#define MAX 100
+
 void radix_sort(int a[], int n )
  {
 int i, b[MAX], m = 0, exp = 1;
